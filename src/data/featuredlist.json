@@ -1,0 +1,22 @@
+[
+  {
+    "title": "AI-Powered Suggestions",
+    "icon": "./ai.svg",
+    "paragraph": "Get personalized content suggestions tailored to your skills and experience."
+  },
+  {
+    "title": "Professional Templates",
+    "icon": "./grid.svg",
+    "paragraph": "Choose from a variety of professionally designed templates."
+  },
+  {
+    "title": "Real-Time Feedback",
+    "icon": "./time.svg",
+    "paragraph": "Instantly improve your resume with real-time AI feedback and optimization tips."
+  },
+  {
+    "title": "Secure and Reliable",
+    "icon": "./lock.svg",
+    "paragraph": "Your data is safe with us, thanks to our secure cloud storage and authentication system."
+  }
+]
