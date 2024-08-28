@@ -1,9 +1,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useDispatch } from "react-redux";
+import { signInGoogle } from "../redux/auth/authSlice";
 
-const SignIn = () => {
-  const signIn = () => {
-    console.log("hello world");
+const SignInPage = () => {
+  const dispatch = useDispatch();
+  const handleLogin = () => {
+    dispatch(signInGoogle());
   };
   return (
     <section className="w-full h-screen flex items-center justify-center ">
@@ -18,7 +21,7 @@ const SignIn = () => {
           </p>
         </div>
         <div className="w-full mx-auto text-center py-6">
-          <Button onClick={signIn}>
+          <Button onClick={handleLogin}>
             <div className=" mx-2 shadow-lg">
               <svg
                 width="30px"
@@ -53,4 +56,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;
