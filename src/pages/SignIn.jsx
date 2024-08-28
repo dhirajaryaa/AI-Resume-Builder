@@ -1,13 +1,18 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signInGoogle } from "../redux/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
-  const handleLogin = () => {
-    dispatch(signInGoogle());
-  };
+  const navigate = useNavigate()
+  const { user } = useSelector((state) => state.auth);
+
+  if(user){
+    navigate("/dashboard")
+  }
+
   return (
     <section className="w-full h-screen flex items-center justify-center ">
       <div className="flex flex-col sm:w-2/5 w-11/12 mx-auto bg-secondary p-6 rounded-xl">
@@ -21,8 +26,8 @@ const SignInPage = () => {
           </p>
         </div>
         <div className="w-full mx-auto text-center py-6">
-          <Button onClick={handleLogin}>
-            <div className=" mx-2 shadow-lg">
+          <Button onClick={() => dispatch(signInGoogle())}>
+            <div className=" mx-2 drop-shadow-lg">
               <svg
                 width="30px"
                 height="30px"

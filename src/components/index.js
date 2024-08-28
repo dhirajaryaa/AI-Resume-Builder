@@ -1,2 +1,3 @@
 import Header from "./custom/Header";
-export { Header };
+import UserProfile from "./custom/UserProfile";
+export { Header , UserProfile};

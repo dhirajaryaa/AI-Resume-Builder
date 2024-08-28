@@ -1,8 +1,12 @@
-import React from "react";
 import { Button } from "../ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { UserProfile } from "../index";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <nav className="w-full shadow-lg h-16 flex items-center justify-between px-4 py-2">
       {/* logo */}
@@ -13,9 +17,13 @@ const Header = () => {
         </span>
       </Link>
       {/* signin  */}
-      <Link to={"/auth/signin"}>
-        <Button >SignIn</Button>
-      </Link>
+      {user ? (
+        <UserProfile user={user}/>
+      ) : (
+        <Link to={"/auth/signin"}>
+          <Button>SignIn</Button>
+        </Link>
+      )}
     </nav>
   );
 };
