@@ -7,7 +7,7 @@ const App = () => {
   return (
     <section className="min-h-screen">
       <Header />
-      <main className="container">
+      <main className="container ">
         <Outlet />
       </main>
     </section>

@@ -5,11 +5,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 import FAQ from "../data/faq.json";
 import featured from "../data/featuredlist.json";
 import React from "react";
@@ -25,8 +20,8 @@ const Home = () => {
   return (
     <main className="flex flex-col gap-10 sm:gap:20 py-10 sm:py-20">
       {/* hero */}
-      <section className="text-center h-[60vh] flex items-center justify-center flex-col">
-        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold">
+      <section className="text-center h-[50vh] flex items-center justify-center flex-col">
+        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold text-gray-800">
           Create Your Perfect <span className="text-primary">Resume</span>
           <span className="block">
             in Minutes with <span className="text-destructive">AI</span>
@@ -47,36 +42,34 @@ const Home = () => {
       </section>
 
       {/* how to work */}
-      <section>
+      <section className="py-10">
         <h2 className="font-bold text-md sm:text-2xl text-center">
           Why Choose Our AI Resume Builder?
         </h2>
-        <Carousel className={"py-6"}>
-          <CarouselContent>
-            {featured.map((item, index) => {
-              return (
-                <CarouselItem key={index} className="basis-1/4 p-3">
-                  <div className="p-1">
-                    <Card>
-                      <CardContent className="flex flex-col bg-secondary aspect-square items-center justify-center w-full p-6">
-                        <div className="w-44 h-44 overflow-hidden">
 
-                        <img
-                          src={item.icon}
-                          alt={item.title}
-                          className="object-cover w-full h-full"
-                        />
-                        </div>
-                        <CardTitle className={"my-4 text-lg sm:text-xl"}>{item.title}</CardTitle>
-                        <CardDescription className="text-sm">{item.paragraph}</CardDescription>
-                      </CardContent>
-                    </Card>
+        <div className="grid mt-10 gap-4 f grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ">
+          {featured.map((item, index) => {
+            return (
+              <Card key={index} className={"w-60 mx-auto sm:w-full"}>
+                <CardContent className="flex flex-col bg-secondary aspect-square items-center justify-center w-full p-6">
+                  <div className="h-20 lg:h-28 overflow-hidden">
+                    <img
+                      src={item.icon}
+                      alt={item.title}
+                      className="object-cover w-full h-full"
+                    />
                   </div>
-                </CarouselItem>
-              );
-            })}
-           </CarouselContent>
-        </Carousel>
+                  <CardTitle className={"my-4 text-sm sm:text-xl text-gray-700"}>
+                    {item.title}
+                  </CardTitle>
+                  <CardDescription className="text-sm">
+                    {item.paragraph}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       </section>
 
       {/* FAQ  */}

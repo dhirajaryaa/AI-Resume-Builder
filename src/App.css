@@ -44,3 +44,13 @@ height: 100%;
 background: radial-gradient(circle,transparent,rgba(0, 0, 0, 0.1));
 }
  */
+
+ .hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
