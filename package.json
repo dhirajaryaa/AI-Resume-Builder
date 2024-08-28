@@ -10,11 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@radix-ui/react-label": "^2.1.0",
-=======
     "@radix-ui/react-accordion": "^1.2.0",
->>>>>>> develop
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@reduxjs/toolkit": "^2.2.7",
     "class-variance-authority": "^0.7.0",

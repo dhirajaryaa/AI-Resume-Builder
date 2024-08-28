@@ -1,47 +1,31 @@
 import React from "react";
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button";
+
 
 const SignIn = () => {
   return (
     <section className="w-full h-screen flex items-center justify-center">
-      <Card className="w-2/5">
-        <CardHeader>
-          <CardTitle>Welcome Back to ResuCraft!</CardTitle>
-          <CardDescription>
-          Log in to continue building your perfect resume.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {/* <form>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Name of your project" />
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="framework">Framework</Label>
-                <Input id="name" placeholder="Name of your project" />
-                
-              </div>
-            </div>
-          </form> */}
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          {/* <Button variant="outline">Cancel</Button>
-          <Button>Deploy</Button> */}
-          <Button className={"w-10/12 mx-auto"}>Sign With Google</Button>
-        </CardFooter>
-      </Card>
+      <div className="flex flex-col sm:w-2/5 w-11/12 mx-auto bg-secondary p-6 rounded-xl">
+        <div>
+          <h1 className="text-xl font-bold text-center">
+            Welcome Back to ResuCraft!
+          </h1>
+
+          <p className="text-sm text-center font-semibold text-gray-500">
+            Log in to continue building your perfect resume.
+          </p>
+        </div>
+        <div className="w-full mx-auto text-center py-6">
+          <Button>
+            <img
+              src="https://www.svgrepo.com/show/452216/google.svg"
+              alt="Google"
+              className="w-8 drop-shadow-lg mx-3"
+            />
+            <span className="text-lg">Sign in Google</span>
+          </Button>
+        </div>
+      </div>
     </section>
   );
 };
