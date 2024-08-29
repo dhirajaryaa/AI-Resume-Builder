@@ -1,4 +1,6 @@
-const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+
+
 
 const initialState = {
   isLoading: false,
