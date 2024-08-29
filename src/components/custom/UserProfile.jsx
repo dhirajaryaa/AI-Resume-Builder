@@ -9,6 +9,7 @@ import {
 import { LogOut, Settings } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const UserProfile = ({ user }) => {
   return (
@@ -18,12 +19,13 @@ const UserProfile = ({ user }) => {
       </Link>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="rounded-full p-1 border-2 border-primary">
-            <img
-              src={user.photoURL}
-              alt={user.displayName}
-              className="w-12 h-12 rounded-full"
-            />
+          <div className="rounded-full border-2 border-primary">
+            <Avatar>
+              <AvatarImage src={user.photoURL} />
+              <AvatarFallback className={"text-xl"}>
+                {user.displayName[0]}
+              </AvatarFallback>
+            </Avatar>
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
