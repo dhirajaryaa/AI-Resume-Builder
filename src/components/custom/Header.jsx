@@ -1,11 +1,11 @@
 import { Button } from "../ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { UserProfile } from "../index";
+import useUser from "@/hooks/useUser";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
+  const location = useLocation();
+  const { user } = useUser();
 
   return (
     <nav className="w-full shadow-lg h-16 flex items-center justify-between px-4 py-2">
@@ -17,8 +17,8 @@ const Header = () => {
         </span>
       </Link>
       {/* signin  */}
-      {user ? (
-        <UserProfile user={user}/>
+      {user && location.pathname !== "/" ? (
+        <UserProfile user={user} />
       ) : (
         <Link to={"/auth/signin"}>
           <Button>SignIn</Button>

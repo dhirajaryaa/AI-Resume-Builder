@@ -26,6 +26,21 @@ export const signInGoogle = createAsyncThunk(
   }
 );
 
+export const checkAuth = createAsyncThunk(
+  "auth/checkAuth",
+  async (_, { rejectWithValue }) => {
+    try {
+      if (auth.currentUser) {
+        return transformUser(auth.currentUser);
+      } else {
+        throw new Error("No user is currently logged in");
+      }
+    } catch (error) {
+      return rejectWithValue(error.massage);
+    }
+  }
+);
+
 export const AuthSlice = createSlice({
   name: "auth",
   initialState,
@@ -40,6 +55,17 @@ export const AuthSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(signInGoogle.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(checkAuth.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkAuth.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(checkAuth.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       });

@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signInGoogle } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import useUser from "@/hooks/useUser";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const { user } = useUser();
 
-  if(user){
-    navigate("/dashboard")
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   return (
     <section className="w-full h-screen flex items-center justify-center ">
