@@ -17,13 +17,11 @@ export const resumeData = {
       degree: "Bachelor of Technology in Computer Science",
       institution: "Indian Institute of Technology, Delhi",
       yearOfCompletion: "2018",
-      marks: "8.5 CGPA",
     },
     {
       degree: "Higher Secondary Certificate (HSC)",
       institution: "Delhi Public School, R.K. Puram",
       yearOfCompletion: "2014",
-      marks: "92%",
     },
   ],
   workExperience: [

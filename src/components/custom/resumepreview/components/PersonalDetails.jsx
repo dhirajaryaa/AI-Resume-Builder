@@ -4,7 +4,7 @@ const PersonalDetails = ({ resumeData }) => {
   const { firstName, lastName, email, phone, address, jobRole } =
     resumeData.personalDetails;
   return (
-    <div>
+    <>
       <h2
         className={`text-xl font-bold text-center`}
         style={{ color: resumeData.themeColor }}
@@ -26,7 +26,7 @@ const PersonalDetails = ({ resumeData }) => {
         <h3 className="font-medium text-sm">{email}</h3>
       </div>
       <hr className='border-[2px] mt-6' style={{ borderColor: resumeData.themeColor }}/>
-    </div>
+    </>
 
   );
 };
