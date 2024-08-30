@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useDispatch } from "react-redux";
+import { signInGoogle } from "../redux/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import useUser from "@/hooks/useUser";
 
-const SignIn = () => {
-  const signIn = () => {
-    console.log("hello world");
-  };
+const SignInPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
+
   return (
-    <section className="w-full h-screen flex items-center justify-center">
+    <section className="w-full h-screen flex items-center justify-center ">
       <div className="flex flex-col sm:w-2/5 w-11/12 mx-auto bg-secondary p-6 rounded-xl">
         <div>
           <h1 className="text-xl font-bold text-center">
@@ -18,8 +29,8 @@ const SignIn = () => {
           </p>
         </div>
         <div className="w-full mx-auto text-center py-6">
-          <Button onClick={signIn}>
-            <div className="drop-shadow-lg mx-2">
+          <Button onClick={() => dispatch(signInGoogle())}>
+            <div className=" mx-2 drop-shadow-lg">
               <svg
                 width="30px"
                 height="30px"
@@ -53,4 +64,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;
