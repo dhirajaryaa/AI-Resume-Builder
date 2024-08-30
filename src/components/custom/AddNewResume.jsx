@@ -23,9 +23,6 @@ const AddNewResume = () => {
     dispatch(createResume({ title: input ,uid:user.uid}));
     setInput("");
   };
-  useEffect(()=>{
-    setIsOpenDialog(isLoading)
-  },[isLoading])
 
   return (
     <>

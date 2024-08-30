@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
-import { Home, Dashboard, SignIn } from "./pages";
+import { Home, Dashboard, SignIn, EditResume } from "./pages";
 import { Provider } from "react-redux";
 import { Store } from "./redux/Store.js";
 
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard />,
       },
+      {
+        path: "/dashboard/resume/:resumeId/edit",
+        element: <EditResume />,
+      },
     ],
   },
   {
@@ -28,9 +32,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <Provider store={Store}>
       <RouterProvider router={router} />
     </Provider>
-  </StrictMode>
+  // </StrictMode>
 );

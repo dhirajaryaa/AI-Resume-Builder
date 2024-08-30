@@ -1,6 +1,6 @@
 import { db } from "@/firebase/firebase";
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { addDoc, collection, doc, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, onSnapshot } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 const initialState = {
@@ -17,7 +17,6 @@ export const createResume = createAsyncThunk(
         resumeId: nanoid(),
         title: title,
       };
-
       // get users ref
       const userRef = doc(db, "users", uid);
       // get resume ref
@@ -37,24 +36,25 @@ export const getResumes = createAsyncThunk(
     try {
       const userRef = doc(db, "users", uid);
 
-      // Reference to the 'resumes' subcollection under the user document
+      // Reference to the 'resumes' subcollecion under the user document
       const resumesCollectionRef = collection(userRef, "resumes");
 
-      // Get all documents in the 'resumes' subcollection
+      // Get all documents in the 'resumes' subcollecion
       const querySnapshot = await getDocs(resumesCollectionRef);
-
-      // Array to hold resume data
-      const resumes = [];
-
+      
       // Loop through each document and extract data
+      let resumes =[];
+
       querySnapshot.forEach((doc) => {
-        resumes.push({ id: doc.id, ...doc.data() });
+        
+        resumes.push({ docId: doc.id, ...doc.data() });
+        // return doc
       });
 
-      console.log("Resumes: ", resumes);
 
       // Return the resumes array
       return resumes;
+
     } catch (error) {
       return rejectWithValue(error.massage);
     }
@@ -85,6 +85,7 @@ const DbSlice = createSlice({
       })
       .addCase(getResumes.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.resumes = [...action.payload]
         console.log(action.payload);
       })
       .addCase(getResumes.rejected, (state, action) => {

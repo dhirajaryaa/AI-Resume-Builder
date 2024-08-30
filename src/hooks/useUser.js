@@ -1,7 +1,7 @@
 import { auth } from "@/firebase/firebase";
 import { checkAuth } from "@/redux/auth/authSlice";
 import { onAuthStateChanged } from "firebase/auth";
-import{ useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useUser = () => {
@@ -11,17 +11,19 @@ const useUser = () => {
 
   useEffect(() => {
     // Start loading when setting up the listener
-    setLoading(true);
-
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // Dispatch action to check user authentication status
-      dispatch(checkAuth(currentUser)).finally(() => {
-        setLoading(false); // Stop loading after the check is done
+    
+    if (!user) {
+      setLoading(true);
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        // Dispatch action to check user authentication status
+        dispatch(checkAuth(currentUser)).finally(() => {
+          setLoading(false); // Stop loading after the check is done
+        });
       });
-    });
-
-    // Cleanup subscription on component unmount
+      // Cleanup subscription on component unmount
     return () => unsubscribe();
+    }
+
   }, [dispatch]);
 
   return { user, loading };
