@@ -1,10 +1,9 @@
 import { Button } from "../ui/button";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserProfile } from "../index";
 import useUser from "@/hooks/useUser";
 
 const Header = () => {
-  const location = useLocation();
   const { user } = useUser();
 
   return (
@@ -17,7 +16,7 @@ const Header = () => {
         </span>
       </Link>
       {/* signin  */}
-      {user && location.pathname !== "/" ? (
+      {user ? (
         <UserProfile user={user} />
       ) : (
         <Link to={"/auth/signin"}>
