@@ -1,5 +1,5 @@
-import { PlusSquare, SquareSquare } from "lucide-react";
-import React, { useState } from "react";
+import { LoaderCircle, PlusSquare } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +9,23 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { useDispatch, useSelector } from "react-redux";
+import { createResume } from "@/redux/database/dbSlice";
 
 const AddNewResume = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [input, setInput] = useState("");
+  const { isLoading } = useSelector((state) => state.db);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const onCreate = () => {
+    dispatch(createResume({ title: input ,uid:user.uid}));
+    setInput("");
+  };
+  useEffect(()=>{
+    setIsOpenDialog(isLoading)
+  },[isLoading])
 
   return (
     <>
@@ -40,7 +53,13 @@ const AddNewResume = () => {
                 Cancel
               </Button>
 
-              <Button disabled={!input.length > 0}>Add</Button>
+              <Button disabled={!input} onClick={onCreate}>
+                {isLoading ? (
+                  <LoaderCircle className="w-6 h-6 animate-spin" />
+                ) : (
+                  "Create"
+                )}
+              </Button>
             </div>
           </DialogHeader>
         </DialogContent>
