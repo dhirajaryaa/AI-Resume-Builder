@@ -11,18 +11,25 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useDispatch, useSelector } from "react-redux";
 import { createResume } from "@/redux/database/dbSlice";
+import { useNavigate } from "react-router-dom";
 
 const AddNewResume = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [input, setInput] = useState("");
-  const { isLoading } = useSelector((state) => state.db);
+  const { isLoading,recentDocId } = useSelector((state) => state.db);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onCreate = () => {
-    dispatch(createResume({ title: input ,uid:user.uid}));
+    dispatch(createResume({ title: input ,uid:user.uid})).finally(()=>{
+      setIsOpenDialog(false);
+    })
     setInput("");
   };
+  if(recentDocId){
+    navigate(`/dashboard/resume/${recentDocId}/edit`)
+  }
 
   return (
     <>

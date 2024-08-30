@@ -1,12 +1,12 @@
 import { db } from "@/firebase/firebase";
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { addDoc, collection, doc, getDocs, onSnapshot } from "firebase/firestore";
-import { useSelector } from "react-redux";
+import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 
 const initialState = {
   isLoading: false,
   dbError: null,
   resumes: [],
+  recentDocId:null,
 };
 
 export const createResume = createAsyncThunk(
@@ -73,6 +73,7 @@ const DbSlice = createSlice({
       })
       .addCase(createResume.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.recentDocId = action.payload
         console.log(action.payload);
       })
       .addCase(createResume.rejected, (state, action) => {
