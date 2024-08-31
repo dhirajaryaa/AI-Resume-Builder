@@ -10,7 +10,7 @@ const ResumePreview = () => {
      {/* summary */}
     <Summary summary={resumeData.summary}/>
      {/* education */}
-     {/* <Education resumeData={resumeData} /> */}
+     <Education resumeData={resumeData} />
 
      {/* workExperience */}
      <ProfessionalExperience resumeData={resumeData} />

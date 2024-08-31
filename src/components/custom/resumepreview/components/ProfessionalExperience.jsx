@@ -6,7 +6,7 @@ const ProfessionalExperience = ({
   return (
     <>
       <h2
-        className="font-bold text-xl text-center"
+        className="font-bold text-xl text-center mt-2"
         style={{ color: themeColor }}
       >
         Professional Experience
