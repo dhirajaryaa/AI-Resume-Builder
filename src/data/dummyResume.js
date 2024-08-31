@@ -2,14 +2,14 @@ export const resumeData = {
   personalDetails: {
     firstName: "Rohan",
     lastName: "Kumar",
-    jobRole:     "Software Engineer",
+    jobRole: "Software Engineer",
     email: "rohankumar@example.com",
     phone: "+91 9876543210",
     address: "123, MG Road, Bengaluru, Karnataka, India",
     linkedIn: "https://www.linkedin.com/in/rohankumar",
     github: "https://github.com/rohankumar",
   },
-  themeColor:"#f43f5e",
+  themeColor: "#f43f5e",
   summary:
     "Results-driven software engineer with over 5 years of experience in developing scalable web applications and working in agile environments. Proficient in JavaScript, React, Node.js, and RESTful APIs. Passionate about building user-centric products and delivering high-quality solutions.",
   education: [
@@ -53,30 +53,18 @@ export const resumeData = {
     },
   ],
   skills: [
-    "JavaScript",
-    "React",
-    "Node.js",
-    "Redux",
-    "Express",
-    "MongoDB",
-    "SQL",
-    "HTML/CSS",
-    "Git",
-    "Agile/Scrum",
-    "RESTful APIs",
+    { name: "React", knowledge: "80%" },
+    { name: "JavaScript", knowledge: "90%" },
+    { name: "Redux", knowledge: "70%" },
+    { name: "Express", knowledge: "85%" },
+    { name: "MongoDB", knowledge: "75%" },
+    { name: "SQL", knowledge: "95%" },
+    { name: "HTML/CSS", knowledge: "98%" },
+    { name: "Git", knowledge: "92%" },
+    { name: "Agile/Scrum", knowledge: "80%" },
+    { name: "RESTful APIs", knowledge: "88%" },
   ],
-  certifications: [
-    {
-      title: "Certified Kubernetes Application Developer (CKAD)",
-      institution: "The Linux Foundation",
-      year: "2021",
-    },
-    {
-      title: "AWS Certified Solutions Architect – Associate",
-      institution: "Amazon Web Services",
-      year: "2020",
-    },
-  ],
+
   projects: [
     {
       projectName: "E-commerce Platform",
@@ -91,6 +79,4 @@ export const resumeData = {
       technologies: ["React", "Redux", "Firebase"],
     },
   ],
-  languages: ["English", "Hindi", "Kannada"],
-  interests: ["Cricket", "Traveling", "Reading Technology Blogs"],
 };

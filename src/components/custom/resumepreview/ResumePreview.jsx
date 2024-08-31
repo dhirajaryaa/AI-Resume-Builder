@@ -1,26 +1,33 @@
-import React from 'react'
-import { resumeData } from '@/data/dummyResume'
-import { Education, PersonalDetails, ProfessionalExperience, Summary } from './components'
+import React from "react";
+import { resumeData } from "@/data/dummyResume";
+import {
+  Education,
+  PersonalDetails,
+  ProfessionalExperience,
+  Skills,
+  Summary,
+} from "./components";
 const ResumePreview = () => {
   return (
-    <section className={`shadow-lg h-full p-14 border-t-8 border-[${resumeData.themeColor}]`} >
-     {/* personalDetails  */}
-      <PersonalDetails  resumeData={resumeData}/>
+    <section
+      className={`shadow-lg h-full p-14 border-t-8 `}
+      style={{ borderColor: resumeData.themeColor }}
+    >
+      {/* personalDetails  */}
+      <PersonalDetails resumeData={resumeData} />
 
-     {/* summary */}
-    <Summary summary={resumeData.summary}/>
-     {/* education */}
-     <Education resumeData={resumeData} />
+      {/* summary */}
+      <Summary summary={resumeData.summary} />
+      {/* education */}
+      <Education resumeData={resumeData} />
 
-     {/* workExperience */}
-     <ProfessionalExperience resumeData={resumeData} />
+      {/* workExperience */}
+      <ProfessionalExperience resumeData={resumeData} />
 
-
-     {/* skills */}
-
-
+      {/* skills */}
+      <Skills resumeData={resumeData}/>
     </section>
-  )
-}
+  );
+};
 
-export default ResumePreview
+export default ResumePreview;
