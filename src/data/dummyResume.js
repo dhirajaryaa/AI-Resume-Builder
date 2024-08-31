@@ -55,14 +55,14 @@ export const resumeData = {
   skills: [
     { name: "React", knowledge: "80%" },
     { name: "JavaScript", knowledge: "90%" },
-    { name: "Redux", knowledge: "70%" },
+    { name: "Redux", knowledge: "40%" },
     { name: "Express", knowledge: "85%" },
     { name: "MongoDB", knowledge: "75%" },
-    { name: "SQL", knowledge: "95%" },
+    { name: "SQL", knowledge: "55%" },
     { name: "HTML/CSS", knowledge: "98%" },
-    { name: "Git", knowledge: "92%" },
-    { name: "Agile/Scrum", knowledge: "80%" },
-    { name: "RESTful APIs", knowledge: "88%" },
+    { name: "Git", knowledge: "52%" },
+    { name: "Agile/Scrum", knowledge: "20%" },
+    { name: "RESTful APIs", knowledge: "68%" },
   ],
 
   projects: [
