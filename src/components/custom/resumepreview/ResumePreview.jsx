@@ -10,7 +10,7 @@ import {
 const ResumePreview = () => {
   return (
     <section
-      className={`shadow-lg h-full p-14 border-t-8 `}
+      className={`shadow-lg h-full p-6 lg:p-14 border-t-8 `}
       style={{ borderColor: resumeData.themeColor }}
     >
       {/* personalDetails  */}

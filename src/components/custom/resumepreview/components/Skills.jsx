@@ -14,10 +14,18 @@ const Skills = ({ resumeData: { skills, themeColor } }) => {
         {skills.map((item, index) => (
           <div
             key={index}
-            className="text-sm  font-semibold flex justify-between w-full"
+            className="text-xs  font-semibold flex justify-between w-full"
           >
-            <p>{item.name}</p>
-            <p style={{ color: themeColor }}>{item.knowledge}</p>
+            <h3>{item.name}</h3>
+            <div className="bg-gray-200 h-2 w-28">
+              <div
+                className="h-2"
+                style={{
+                  backgroundColor: themeColor,
+                  width: item.knowledge + "%",
+                }}
+              ></div>
+            </div>
           </div>
         ))}
       </div>
