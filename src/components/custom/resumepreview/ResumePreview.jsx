@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { resumeData } from "@/data/dummyResume";
 import {
   Education,
@@ -7,7 +7,9 @@ import {
   Skills,
   Summary,
 } from "./components";
+import { getOnStorage } from "@/hooks/useLocalStorage";
 const ResumePreview = () => {
+
   return (
     <section
       className={`shadow-lg h-full p-6 lg:p-14 border-t-8 `}
@@ -25,7 +27,7 @@ const ResumePreview = () => {
       <ProfessionalExperience resumeData={resumeData} />
 
       {/* skills */}
-      <Skills resumeData={resumeData}/>
+      <Skills resumeData={resumeData} />
     </section>
   );
 };

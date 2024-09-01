@@ -74,7 +74,7 @@ const DbSlice = createSlice({
       .addCase(createResume.fulfilled, (state, action) => {
         state.isLoading = false;
         state.recentDocId = action.payload
-        console.log(action.payload);
+        // console.log(action.payload);
       })
       .addCase(createResume.rejected, (state, action) => {
         state.isLoading = false;
