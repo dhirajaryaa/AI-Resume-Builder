@@ -11,10 +11,15 @@ const getOnStorage = (key) => {
   return resumeData;
 };
 
-const updateOnStorage = ({ data, parent, key }) => {
+
+const updateOnStorage = (data, parent, key) => {
+  const [resumeInfo, setResumeInfo] = useState();
   const { name, value } = data;
-  const [prevData, setPrevData] = useState((prevValue = prevData));
-  const [resumeInfo, setResumeInfo] = useState(() => getOnStorage(key));
+  console.log("entered",name,value);
+  
+  
+  console.log(resumeInfo);
+  
 
   if (parent === "") {
     setResumeInfo((prev) => ({ ...prev, [name]: value }));
@@ -29,8 +34,6 @@ const updateOnStorage = ({ data, parent, key }) => {
   }, [resumeInfo]);
 
   return {
-    prevData,
-    setPrevData,
     resumeInfo,
     setResumeInfo,
   };

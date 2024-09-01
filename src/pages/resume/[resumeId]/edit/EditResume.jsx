@@ -12,7 +12,7 @@ const EditResume = () => {
   return (
     <main className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-8">
       {/* Resume Form section  */}
-      <ResumeForm resumeData={resumeData} />
+      <ResumeForm />
 
       {/* Resume Preview section  */}
       <ResumePreview resumeData={resumeData} />

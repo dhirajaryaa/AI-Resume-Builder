@@ -1,18 +1,10 @@
 import { Button } from "@/components/ui/button";
-import {
-  ArrowLeft,
-  ArrowRight,
-  LayoutGrid,
-} from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, LayoutGrid } from "lucide-react";
+import React, { useState } from "react";
 import { PersonalDetailsForm } from "./components/personalDetailsForm";
-import { resumeData} from "@/data/dummyResume";
 
-const ResumeForm = ({resumeData}) => {
-  
+const ResumeForm = () => {
   const [activeIndex, setActiveIndex] = useState(1);
-  // const [resumeData,setResumeData] = useState(data)
-  
 
   return (
     <section>
@@ -25,7 +17,6 @@ const ResumeForm = ({resumeData}) => {
           {activeIndex > 1 && (
             <Button
               size="sm"
-           
               onClick={() => setActiveIndex((prev) => prev - 1)}
             >
               <ArrowLeft />
@@ -41,9 +32,8 @@ const ResumeForm = ({resumeData}) => {
         </div>
       </div>
 
-{/* Personal Details  */}
-<PersonalDetailsForm />
-
+      {/* Personal Details  */}
+      <PersonalDetailsForm />
     </section>
   );
 };
