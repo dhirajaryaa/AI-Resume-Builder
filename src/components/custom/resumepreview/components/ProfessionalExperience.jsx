@@ -1,21 +1,19 @@
 import React from "react";
 
-const ProfessionalExperience = ({
-  resumeData: { workExperience, themeColor },
-}) => {
+const ProfessionalExperience = ({resumeData}) => {
   return (
     <>
       <h2
         className="font-bold text-xl text-center mt-2"
-        style={{ color: themeColor }}
+        style={{ color: resumeData?.themeColor }}
       >
         Professional Experience
       </h2>
-      <hr className="border-[1px] my-2" style={{ borderColor: themeColor }} />
-      {workExperience.map((data, index) => {
+      <hr className="border-[1px] my-2" style={{ borderColor: resumeData?.themeColor }} />
+      {resumeData?.workExperience.map((data, index) => {
         return (
           <div key={index}>
-            <h2 className="font-bold text-lg" style={{ color: themeColor }}>
+            <h2 className="font-bold text-lg" style={{ color: resumeData?.themeColor }}>
               {data.jobTitle}
             </h2>
             <div className="flex items-center justify-between">
@@ -33,7 +31,6 @@ const ProfessionalExperience = ({
                 );
               })}
             </ul>
-            
           </div>
         );
       })}

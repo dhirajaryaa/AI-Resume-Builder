@@ -1,17 +1,22 @@
+// import { resumeData } from "@/data/dummyResume";
 import React from "react";
 
-const Skills = ({ resumeData: { skills, themeColor } }) => {
+const Skills = ({ resumeData }) => {
+
   return (
     <>
       <h2
         className="font-bold text-xl text-center mt-3"
-        style={{ color: themeColor }}
+        style={{ color: resumeData?.themeColor }}
       >
         Skills
       </h2>
-      <hr className="border-[1px] my-2" style={{ borderColor: themeColor }} />
+      <hr
+        className="border-[1px] my-2"
+        style={{ borderColor: resumeData?.themeColor }}
+      />
       <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-5 items-center">
-        {skills.map((skill, index) => {
+        {resumeData?.skills.map((skill, index) => {
           return (
             <div
               key={index}
@@ -24,7 +29,7 @@ const Skills = ({ resumeData: { skills, themeColor } }) => {
                   className="h-2"
                   style={{
                     width: skill.knowledge,
-                    backgroundColor: themeColor,
+                    backgroundColor: resumeData?.themeColor,
                   }}
                 ></div>
               </div>

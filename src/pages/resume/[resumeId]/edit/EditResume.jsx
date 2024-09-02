@@ -1,16 +1,24 @@
 import { ResumeForm, ResumePreview } from "@/components";
-import { resumeData} from "@/data/dummyResume";
+import { ResumeDataContext } from "@/context/ResumeDataContext";
+import { resumeData as data } from "@/data/dummyResume";
+import { useEffect, useState } from "react";
 
 const EditResume = () => {
+  const [resumeData, setResumeData] = useState();
+  useEffect(() => {
+    setResumeData(data);
+  }, []);
 
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-8">
-      {/* Resume Form section  */}
-      <ResumeForm />
+    <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>
+      <main className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-8">
+        {/* Resume Form section  */}
+        <ResumeForm />
 
-      {/* Resume Preview section  */}
-      <ResumePreview resumeData={resumeData} />
-    </main>
+        {/* Resume Preview section  */}
+        <ResumePreview />
+      </main>
+    </ResumeDataContext.Provider>
   );
 };
 
