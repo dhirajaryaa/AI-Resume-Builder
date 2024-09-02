@@ -5,7 +5,7 @@ import { PersonalDetailsForm } from "./components/personalDetailsForm";
 
 const ResumeForm = () => {
   const [activeIndex, setActiveIndex] = useState(1);
-
+  const [enableNext, setEnableNext] = useState(false);
   return (
     <section>
       <div className="flex items-center justify-between">
@@ -18,6 +18,7 @@ const ResumeForm = () => {
             <Button
               size="sm"
               onClick={() => setActiveIndex((prev) => prev - 1)}
+              disabled={!enableNext}
             >
               <ArrowLeft />
             </Button>
@@ -26,6 +27,7 @@ const ResumeForm = () => {
             size="sm"
             className="flex gap-2"
             onClick={() => setActiveIndex((prev) => prev + 1)}
+            disabled={!enableNext}
           >
             Next <ArrowRight />
           </Button>
@@ -33,7 +35,7 @@ const ResumeForm = () => {
       </div>
 
       {/* Personal Details  */}
-      <PersonalDetailsForm />
+      <PersonalDetailsForm activeIndex={(v) => setActiveIndex(v)} setEnableNext={setEnableNext}/>
     </section>
   );
 };

@@ -40,7 +40,7 @@ const AddNewResume = () => {
     <>
       <div
         onClick={() => setIsOpenDialog(true)}
-        className="flex items-center justify-center h-[300px] border-2 rounded-xl hover:shadow-lg transition-all duration-200 bg-secondary border-dashed hover:scale-105 cursor-pointer"
+        className="flex items-center justify-center h-[350px] border-2 rounded-xl hover:shadow-lg transition-all duration-200 bg-secondary border-dashed hover:scale-105 cursor-pointer"
       >
         <PlusSquare size={28} />
       </div>

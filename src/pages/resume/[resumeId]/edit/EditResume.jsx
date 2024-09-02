@@ -1,13 +1,26 @@
 import { ResumeForm, ResumePreview } from "@/components";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
 import { resumeData as data } from "@/data/dummyResume";
+import useUser from "@/hooks/useUser";
+import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 const EditResume = () => {
+  const { user, loading } = useUser();
   const [resumeData, setResumeData] = useState();
   const { resumeId } = useParams();
-  console.log(resumeId);
+
+  if (!user && loading) {
+    <Navigate to="/" replace="true" />;
+  }
+  if (loading) {
+    return (
+      <div className="w-full h-screen fixed top-0 left-0 flex items-center justify-center">
+        <LoaderCircle className="w-12 h-12 animate-spin" />
+      </div>
+    );
+  }
 
   useEffect(() => {
     setResumeData(data);

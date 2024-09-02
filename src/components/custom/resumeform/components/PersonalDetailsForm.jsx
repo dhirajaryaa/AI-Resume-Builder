@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
-import { Loader2Icon} from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
-export const PersonalDetailsForm = () => {
+export const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
   const { setResumeData } = useContext(ResumeDataContext);
   const { isLoading } = useSelector((state) => state.db);
 
@@ -15,6 +15,11 @@ export const PersonalDetailsForm = () => {
       ...prev,
       personalDetails: { ...prev.personalDetails, [name]: value },
     }));
+  };
+
+  const handleSubmit = () => {
+    activeIndex(2);
+    setEnableNext(true);
   };
 
   return (
@@ -99,11 +104,9 @@ export const PersonalDetailsForm = () => {
             className="flex gap-2 shadow-md"
             type="submit"
             disabled={isLoading}
+            onClick={handleSubmit}
           >
-            {
-          isLoading ?
-          <Loader2Icon className="animate-spin"/>:"Save"
-          }
+            {isLoading ? <Loader2Icon className="animate-spin" /> : "Save"}
           </Button>
         </div>
       </form>
