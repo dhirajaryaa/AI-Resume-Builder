@@ -1,12 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ResumeDataContext } from "@/context/ResumeDataContext";
+import { Loader2Icon, LoaderIcon } from "lucide-react";
+import { useContext } from "react";
+import { useSelector } from "react-redux";
 export const PersonalDetailsForm = () => {
+  const { setResumeData } = useContext(ResumeDataContext);
+  const { isLoading } = useSelector((state) => state.db);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    
+    setResumeData((prev) => ({
+      ...prev,
+      personalDetails: { ...prev.personalDetails, [name]: value },
+    }));
   };
 
   return (
@@ -21,7 +29,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="firstName">First Name</Label>
             <Input
-            required
+              required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="firstName"
@@ -32,7 +40,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="lastName">Last Name</Label>
             <Input
-            required
+              required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="lastName"
@@ -43,7 +51,7 @@ export const PersonalDetailsForm = () => {
           <div className="col-span-2">
             <Label htmlFor="jobRole">Job Role</Label>
             <Input
-            required
+              required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="jobRole"
@@ -54,7 +62,7 @@ export const PersonalDetailsForm = () => {
           <div className="col-span-2">
             <Label htmlFor="address">Address</Label>
             <Input
-            required
+              required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="address"
@@ -65,7 +73,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="phone">Phone</Label>
             <Input
-            required
+              required
               type="text"
               name="phone"
               id="phone"
@@ -76,7 +84,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
-            required
+              required
               type="email"
               name="email"
               id="email"
@@ -86,8 +94,16 @@ export const PersonalDetailsForm = () => {
           </div>
         </div>
         <div className="flex items-center justify-end gap-5 mt-8">
-          <Button size="lg" className="flex gap-2 shadow-md" type="submit">
-            Save
+          <Button
+            size="lg"
+            className="flex gap-2 shadow-md"
+            type="submit"
+            disabled={isLoading}
+          >
+            {
+          isLoading ?
+          <Loader2Icon className="animate-spin"/>:"Save"
+          }
           </Button>
         </div>
       </form>
