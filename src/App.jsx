@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components";
+import { Toaster } from "./components/ui/toaster";
 
 const App = () => {
   return (
@@ -10,6 +11,8 @@ const App = () => {
       <main className="container ">
         <Outlet />
       </main>
+      <Toaster />
+
     </section>
   );
 };

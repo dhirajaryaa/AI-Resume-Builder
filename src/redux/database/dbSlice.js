@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false,
   dbError: null,
   resumes: [],
-  recentDocId:null,
+  recentDocId: null,
 };
 
 export const createResume = createAsyncThunk(
@@ -41,20 +41,17 @@ export const getResumes = createAsyncThunk(
 
       // Get all documents in the 'resumes' subcollecion
       const querySnapshot = await getDocs(resumesCollectionRef);
-      
+
       // Loop through each document and extract data
-      let resumes =[];
+      let resumes = [];
 
       querySnapshot.forEach((doc) => {
-        
         resumes.push({ docId: doc.id, ...doc.data() });
         // return doc
       });
 
-
       // Return the resumes array
       return resumes;
-
     } catch (error) {
       return rejectWithValue(error.massage);
     }
@@ -73,7 +70,7 @@ const DbSlice = createSlice({
       })
       .addCase(createResume.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.recentDocId = action.payload
+        state.recentDocId = action.payload;
         // console.log(action.payload);
       })
       .addCase(createResume.rejected, (state, action) => {
@@ -86,7 +83,7 @@ const DbSlice = createSlice({
       })
       .addCase(getResumes.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.resumes = [...action.payload]
+        state.resumes = [...action.payload];
       })
       .addCase(getResumes.rejected, (state, action) => {
         state.isLoading = false;

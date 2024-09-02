@@ -10,8 +10,22 @@ import { LogOut, Settings } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useDispatch } from "react-redux";
+import { logOut as SignOut } from "@/redux/auth/authSlice";
+import { useToast } from "@/hooks/use-toast"
+
 
 const UserProfile = ({ user }) => {
+  const dispatch = useDispatch();
+  const { toast } = useToast()
+
+  const logOut = ()=>{
+    dispatch(SignOut());
+    toast({
+      title: "SignOut Successful!",
+  
+    })
+  }
   return (
     <div className="flex items-center gap-4">
       <Link to={"/dashboard"}>
@@ -20,7 +34,7 @@ const UserProfile = ({ user }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div className="rounded-full border-2 border-primary">
-            <Avatar>
+            <Avatar className={"cursor-pointer"}>
               <AvatarImage src={user.photoURL} />
               <AvatarFallback className={"text-xl"}>
                 {user.displayName[0]}
@@ -35,7 +49,7 @@ const UserProfile = ({ user }) => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Button>
+            <Button onClick={logOut}>
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log out</span>
             </Button>

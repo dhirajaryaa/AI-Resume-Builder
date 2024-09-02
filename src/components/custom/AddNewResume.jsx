@@ -16,19 +16,24 @@ import { useNavigate } from "react-router-dom";
 const AddNewResume = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [input, setInput] = useState("");
-  const { isLoading,recentDocId } = useSelector((state) => state.db);
+  const { isLoading, recentDocId } = useSelector((state) => state.db);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onCreate = () => {
-    dispatch(createResume({ title: input ,uid:user.uid})).finally(()=>{
+    dispatch(createResume({ title: input, uid: user.uid })).finally(() => {
       setIsOpenDialog(false);
-    })
+    });
     setInput("");
   };
-  if(recentDocId){
-    navigate(`/dashboard/resume/${recentDocId}/edit`)
+  // useEffect(() => {
+  //   setInput("");
+  //   navigate(`/dashboard/resume/${recentDocId}/edit`);
+  // }, [recentDocId]);
+  if (recentDocId) {
+    setInput("");
+    navigate(`/dashboard/resume/${recentDocId}/edit`);
   }
 
   return (
@@ -45,7 +50,7 @@ const AddNewResume = () => {
           <DialogHeader>
             <DialogTitle>Create New Resume</DialogTitle>
             <DialogDescription>
-              <p>Add a title for your new Resume</p>
+              <span className="block">Add a title for your new Resume</span>
               <Input
                 onChange={(e) => setInput(e.target.value)}
                 className="my-2"
