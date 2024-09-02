@@ -87,7 +87,6 @@ const DbSlice = createSlice({
       .addCase(getResumes.fulfilled, (state, action) => {
         state.isLoading = false;
         state.resumes = [...action.payload]
-        console.log(action.payload);
       })
       .addCase(getResumes.rejected, (state, action) => {
         state.isLoading = false;

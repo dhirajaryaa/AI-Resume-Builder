@@ -2,9 +2,13 @@ import { ResumeForm, ResumePreview } from "@/components";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
 import { resumeData as data } from "@/data/dummyResume";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const EditResume = () => {
   const [resumeData, setResumeData] = useState();
+  const { resumeId } = useParams();
+  console.log(resumeId);
+
   useEffect(() => {
     setResumeData(data);
   }, []);

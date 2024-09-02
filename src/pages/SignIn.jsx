@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { signInGoogle } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import useUser from "@/hooks/useUser";
+import Google from "../assets/google.svg"
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const SignInPage = () => {
         <div className="w-full mx-auto text-center py-6">
           <Button onClick={() => dispatch(signInGoogle())}>
             <div className=" mx-2 drop-shadow-lg">
-              <svg
+              {/* <svg
                 width="30px"
                 height="30px"
                 viewBox="0 0 16 16"
@@ -54,7 +55,8 @@ const SignInPage = () => {
                   fill="#EA4335"
                   d="M8.14 3.77a3.837 3.837 0 012.7 1.05l2.01-1.999a6.786 6.786 0 00-4.71-1.82 7.042 7.042 0 00-6.29 3.858L4.186 6.66c.556-1.658 2.116-2.89 3.952-2.89z"
                 />
-              </svg>
+              </svg> */}
+              <img src={Google} alt="Google Icon" />
             </div>
             <span className="text-lg">Sign in Google</span>
           </Button>
