@@ -21,22 +21,22 @@ const updateOnStorage = (data, parent, key) => {
   console.log(resumeInfo);
   
 
-  if (parent === "") {
-    setResumeInfo((prev) => ({ ...prev, [name]: value }));
-  } else {
-    setResumeInfo((prev) => {
-      return { ...prev, parent: { ...prev.parent, [name]: key } };
-    });
-  }
+  // if (parent === "") {
+  //   setResumeInfo((prev) => ({ ...prev, [name]: value }));
+  // } else {
+  //   setResumeInfo((prev) => {
+  //     return { ...prev, parent: { ...prev.parent, [name]: key } };
+  //   });
+  // }
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(resumeInfo));
-  }, [resumeInfo]);
+  // useEffect(() => {
+  //   localStorage.setItem(key, JSON.stringify(resumeInfo));
+  // }, [resumeInfo]);
 
-  return {
-    resumeInfo,
-    setResumeInfo,
-  };
+  // return {
+  //   resumeInfo,
+  //   setResumeInfo,
+  // };
 };
 
 export { setOnStorage, getOnStorage, updateOnStorage };

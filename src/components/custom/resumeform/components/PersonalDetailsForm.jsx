@@ -1,15 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { updateOnStorage } from "@/hooks/useLocalStorage";
-import React, { useEffect, useState } from "react";
-
 export const PersonalDetailsForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    updateOnStorage({name,value},"personalDetails","resumeData");
-    console.log("change working");
+
     
   };
 
@@ -25,6 +21,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="firstName">First Name</Label>
             <Input
+            required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="firstName"
@@ -35,6 +32,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="lastName">Last Name</Label>
             <Input
+            required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="lastName"
@@ -45,6 +43,7 @@ export const PersonalDetailsForm = () => {
           <div className="col-span-2">
             <Label htmlFor="jobRole">Job Role</Label>
             <Input
+            required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="jobRole"
@@ -55,6 +54,7 @@ export const PersonalDetailsForm = () => {
           <div className="col-span-2">
             <Label htmlFor="address">Address</Label>
             <Input
+            required
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="address"
@@ -65,6 +65,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="phone">Phone</Label>
             <Input
+            required
               type="text"
               name="phone"
               id="phone"
@@ -75,6 +76,7 @@ export const PersonalDetailsForm = () => {
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
+            required
               type="email"
               name="email"
               id="email"
@@ -84,7 +86,7 @@ export const PersonalDetailsForm = () => {
           </div>
         </div>
         <div className="flex items-center justify-end gap-5 mt-8">
-          <Button size="lg" className="flex gap-2 shadow-md">
+          <Button size="lg" className="flex gap-2 shadow-md" type="submit">
             Save
           </Button>
         </div>

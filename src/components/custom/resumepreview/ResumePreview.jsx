@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { resumeData } from "@/data/dummyResume";
 import {
   Education,
@@ -7,7 +6,6 @@ import {
   Skills,
   Summary,
 } from "./components";
-import { getOnStorage } from "@/hooks/useLocalStorage";
 const ResumePreview = () => {
 
   return (
