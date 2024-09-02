@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
-import { Loader2Icon, LoaderIcon } from "lucide-react";
+import { Loader2Icon} from "lucide-react";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 export const PersonalDetailsForm = () => {
