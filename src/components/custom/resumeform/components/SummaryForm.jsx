@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
 import useUser from "@/hooks/useUser";
+import { generateWithAi } from "@/redux/ai/aiSlice";
 import { updateResume } from "@/redux/database/dbSlice";
 import { Bot, Loader2Icon } from "lucide-react";
-import { useCallback, useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -17,6 +17,12 @@ const SummaryForm = ({ activeIndex, setEnableNext }) => {
   const dispatch = useDispatch();
   const { user } = useUser();
   const [summary, setSummary] = useState("");
+  const prompt = "Generate a resume summary in 3-4 lines for a {Front End Developer} at different experience levels: beginner, intermediate, and experienced. The summaries should be in JSON format and include the job title and a brief summary of the candidate's skills, achievements, and experience.";
+
+  const generateSummary = ()=>{
+    const PROMPT = prompt.replace("{Front End Developer}", resumeData?.jobTitle);
+    dispatch(generateWithAi({prompt:PROMPT}));
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -37,6 +43,7 @@ const SummaryForm = ({ activeIndex, setEnableNext }) => {
             <div className="flex items-center justify-between gap-4 mb-3">
               <Label htmlFor="summary">Add Summary</Label>
               <Button
+                onClick={generateSummary}
                 size="sm"
                 type="button"
                 variant="outline"
