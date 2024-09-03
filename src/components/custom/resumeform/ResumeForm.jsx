@@ -7,7 +7,7 @@ const ResumeForm = () => {
   const [activeIndex, setActiveIndex] = useState(1
     
   );
-  const [enableNext, setEnableNext] = useState(false);
+  const [enableNext, setEnableNext] = useState(true);
 
   return (
     <section>

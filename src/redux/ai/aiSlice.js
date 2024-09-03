@@ -9,7 +9,9 @@ import {
 const initialState = {
   isLoading: false,
   isError: null,
-  result: [],
+  result: [
+    
+  ],
 };
 
 export const generateWithAi = createAsyncThunk(
@@ -36,7 +38,6 @@ export const generateWithAi = createAsyncThunk(
       });
 
       const response = await AIChatSession.sendMessage(prompt);
-      console.log(response.response.text());
 
       return response.response.text();
     } catch (error) {
@@ -59,10 +60,11 @@ const AiSlice = createSlice({
       .addCase(generateWithAi.fulfilled, (state, action) => {
         state.isLoading = false;
         state.result = JSON.parse(action.payload);
+        console.log(JSON.parse(action.payload));
       })
       .addCase(generateWithAi.rejected, (state, action) => {
         state.isLoading = false;
-        state.dbError = action.payload;
+        state.isError = action.payload;
       });
   },
 });

@@ -27,9 +27,9 @@ const EditResume = () => {
     );
   }
 
-  if (!user && !loading) {
-    return <Navigate to="/" replace />;
-  }
+  // if (!user && !loading) {
+  //   return <Navigate to="/" replace />;
+  // }
 
   return (
     <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>
