@@ -14,9 +14,7 @@ const EditResume = () => {
 
   useEffect(() => {
     if (!resumeData) {
-      const data = resumes?.filter((data) => data.docId === resumeId)[0] || {}
-      console.log(data);
-      
+      const data = resumes?.filter((data) => data.docId === resumeId)[0] || {};
       setResumeData(data);
     }
   }, [resumeData]);

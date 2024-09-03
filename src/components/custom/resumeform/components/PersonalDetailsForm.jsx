@@ -5,9 +5,10 @@ import { ResumeDataContext } from "@/context/ResumeDataContext";
 import useUser from "@/hooks/useUser";
 import { updateResume } from "@/redux/database/dbSlice";
 import { Loader2Icon } from "lucide-react";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
 export const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
   const { isLoading } = useSelector((state) => state.db);
@@ -23,12 +24,15 @@ export const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
     }));
   });
 
-  const onSubmit = () => {
-    setEnableNext(true);
-    activeIndex(2);
-    dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
-  };
+  const formRef = useRef(null);
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
+    activeIndex(2);
+    setEnableNext(true);
+    if (formRef.current) formRef.current.reset();
+  };
   return (
     <section className="border-t-4 border-primary rounded-lg shadow-lg p-4 mt-4">
       <h2 className="font-bold text-lg">Personal Details</h2>
@@ -36,7 +40,7 @@ export const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
         Enter your personal details here. This information will be used to
         create your resume.
       </p>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={onSubmit}>
         <div className="grid grid-cols-2 gap-4 mt-4">
           <div>
             <Label htmlFor="firstName">First Name</Label>
@@ -111,7 +115,7 @@ export const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
             className="flex gap-2 shadow-md"
             type="submit"
             disabled={isLoading}
-            onClick={onSubmit}
+            // onClick={onSubmit}
           >
             {isLoading ? <Loader2Icon className="animate-spin" /> : "Save"}
           </Button>

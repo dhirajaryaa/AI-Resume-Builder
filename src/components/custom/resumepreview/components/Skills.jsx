@@ -6,13 +6,13 @@ const Skills = ({ resumeData }) => {
   return (
     <>
       <h2
-        className="font-bold text-xl text-center mt-3"
+        className="font-bold text-xl text-center mt-3 text-primary"
         style={{ color: resumeData?.themeColor }}
       >
         Skills
       </h2>
       <hr
-        className="border-[1px] my-2"
+        className="border-[1px] my-2 border-primary"
         style={{ borderColor: resumeData?.themeColor }}
       />
       <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-5 items-center">

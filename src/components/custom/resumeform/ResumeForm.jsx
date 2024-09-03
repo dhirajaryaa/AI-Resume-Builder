@@ -36,7 +36,12 @@ const ResumeForm = () => {
       </div>
 
       {/* Personal Details  */}
-      <PersonalDetailsForm activeIndex={(v) => setActiveIndex(v)} setEnableNext={setEnableNext} />
+      {activeIndex === 1 ? (
+        <PersonalDetailsForm
+          activeIndex={(v) => setActiveIndex(v)}
+          setEnableNext={setEnableNext}
+        />
+      ) : null}
     </section>
   );
 };

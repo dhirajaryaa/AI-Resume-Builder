@@ -42,8 +42,7 @@ export const updateResume = createAsyncThunk(
     try {
       const resumeRef = doc(db, "users", uid, "resumes", docId);
 
-      const res = await updateDoc(resumeRef, resumeData);
-      console.log(res);
+     await updateDoc(resumeRef, resumeData);
     } catch (error) {
       return rejectWithValue(error.message);
     }

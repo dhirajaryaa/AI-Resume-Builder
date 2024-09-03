@@ -4,16 +4,16 @@ const ProfessionalExperience = ({resumeData}) => {
   return (
     <>
       <h2
-        className="font-bold text-xl text-center mt-2"
+        className="font-bold text-xl text-center mt-2 text-primary"
         style={{ color: resumeData?.themeColor }}
       >
         Professional Experience
       </h2>
-      <hr className="border-[1px] my-2" style={{ borderColor: resumeData?.themeColor }} />
+      <hr className="border-[1px] my-2 border-primary" style={{ borderColor: resumeData?.themeColor }} />
       {resumeData?.workExperience&&resumeData?.workExperience.map((data, index) => {
         return (
           <div key={index}>
-            <h2 className="font-bold text-lg" style={{ color: resumeData?.themeColor }}>
+            <h2 className="font-bold text-lg text-primary" style={{ color: resumeData?.themeColor }}>
               {data.jobTitle}
             </h2>
             <div className="flex items-center justify-between">
