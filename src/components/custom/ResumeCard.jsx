@@ -1,12 +1,19 @@
+
 import { Book } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const ResumeCard = ({ resume }) => {
   const navigate = useNavigate();
+
+  const handelClick = () => {
+    // dispatch(getResume({ uid: user.uid, docId: resume?.docId }));
+    navigate(`/dashboard/resume/${resume?.docId}/edit`);
+  };
+
   return (
     <div
-      onClick={() => navigate(`/dashboard/resume/${resume?.docId}/edit`)}
+      onClick={handelClick}
       className="flex relative items-center justify-center h-[350px] border-2 rounded-xl  transition-all  bg-secondary hover:shadow-primary border-primary hover:scale-105 cursor-pointer hover:shadow-md overflow-hidden"
     >
       <Book size={28} />

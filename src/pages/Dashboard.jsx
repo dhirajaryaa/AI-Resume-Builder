@@ -11,11 +11,11 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { resumes } = useSelector((state) => state.db);
   const [isLoading, setIsLoading] = useState(false);
-  const [isUserChecked, setIsUserChecked] = useState(false); 
+  const [isUserChecked, setIsUserChecked] = useState(false);
 
   useEffect(() => {
     // Check if user is authenticated before fetching resumes
-    if (user && !resumes.length >0) {
+    if (user && !resumes.length > 0) {
       setIsLoading(true);
       dispatch(getResumes({ uid: user?.uid })).finally(() => {
         setIsLoading(false); // Stop loading after the fetch is done

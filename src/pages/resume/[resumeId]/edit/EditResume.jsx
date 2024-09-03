@@ -1,24 +1,26 @@
 import { ResumeForm, ResumePreview } from "@/components";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
-import { resumeData as data } from "@/data/dummyResume";
 import useUser from "@/hooks/useUser";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, useParams } from "react-router-dom";
 
 const EditResume = () => {
   const { user, loading } = useUser();
+  const { resumes } = useSelector((state) => state.db);
   const [resumeData, setResumeData] = useState(null);
+  const { resumeId } = useParams();
 
- 
-
-  
   useEffect(() => {
     if (!resumeData) {
+      const data = resumes?.filter((data) => data.docId === resumeId)[0] || {}
+      console.log(data);
+      
       setResumeData(data);
     }
   }, [resumeData]);
-  
+
   if (loading) {
     return (
       <div className="w-full h-screen fixed top-0 left-0 flex items-center justify-center">

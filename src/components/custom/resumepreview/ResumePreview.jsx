@@ -8,9 +8,7 @@ import {
 } from "./components";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
 const ResumePreview = () => {
-  const {resumeData} = useContext(ResumeDataContext);
-
-  
+  const { resumeData } = useContext(ResumeDataContext);
 
   return (
     <section

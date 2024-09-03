@@ -1,12 +1,19 @@
 import { db } from "@/firebase/firebase";
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 
 const initialState = {
   isLoading: false,
   dbError: null,
   resumes: [],
   recentDocId: null,
+  resume: {},
 };
 
 export const createResume = createAsyncThunk(
@@ -24,24 +31,21 @@ export const createResume = createAsyncThunk(
       const docRef = await addDoc(resumesCollectionRef, data);
       return docRef.id;
     } catch (error) {
-      return rejectWithValue(error.massage);
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const updateResume = createAsyncThunk(
   "db/updateResume",
-  async ({ resumeData, docId ,uid}, { rejectWithValue }) => {
+  async ({ resumeData, docId, uid }, { rejectWithValue }) => {
     try {
-      // console.log("resumeRef");
-      console.log(docId);
       const resumeRef = doc(db, "users", uid, "resumes", docId);
-
 
       const res = await updateDoc(resumeRef, resumeData);
       console.log(res);
     } catch (error) {
-      return rejectWithValue(error.massage);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -63,13 +67,11 @@ export const getResumes = createAsyncThunk(
 
       querySnapshot.forEach((doc) => {
         resumes.push({ docId: doc.id, ...doc.data() });
-        // return doc
       });
 
-      // Return the resumes array
       return resumes;
     } catch (error) {
-      return rejectWithValue(error.massage);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -87,7 +89,6 @@ const DbSlice = createSlice({
       .addCase(createResume.fulfilled, (state, action) => {
         state.isLoading = false;
         state.recentDocId = action.payload;
-        // console.log(action.payload);
       })
       .addCase(createResume.rejected, (state, action) => {
         state.isLoading = false;
@@ -105,16 +106,13 @@ const DbSlice = createSlice({
         state.isLoading = false;
         state.dbError = action.payload;
       })
+
       .addCase(updateResume.pending, (state) => {
         state.isLoading = true;
         state.dbError = null;
       })
-      .addCase(updateResume.fulfilled, (state, action) => {
+      .addCase(updateResume.fulfilled, (state) => {
         state.isLoading = false;
-        console.log(action.payload);
-        console.log("updated");
-
-        // state.resumes = [...action.payload];
       })
       .addCase(updateResume.rejected, (state, action) => {
         state.isLoading = false;
