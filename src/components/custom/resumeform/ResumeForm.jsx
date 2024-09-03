@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, LayoutGrid } from "lucide-react";
 import React, { useState } from "react";
-import { PersonalDetailsForm } from "./components/personalDetailsForm";
+import { PersonalDetailsForm, SummaryForm ,EducationForm } from "./";
 
 const ResumeForm = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(2);
   const [enableNext, setEnableNext] = useState(false);
 
   return (
@@ -38,6 +38,22 @@ const ResumeForm = () => {
       {/* Personal Details  */}
       {activeIndex === 1 ? (
         <PersonalDetailsForm
+          activeIndex={(v) => setActiveIndex(v)}
+          setEnableNext={setEnableNext}
+        />
+      ) : null}
+
+      {/* Summary Details  */}
+      {activeIndex === 2 ? (
+        <SummaryForm
+          activeIndex={(v) => setActiveIndex(v)}
+          setEnableNext={setEnableNext}
+        />
+      ) : null}
+
+      {/* Education Details  */}
+      {activeIndex === 3 ? (
+        <EducationForm
           activeIndex={(v) => setActiveIndex(v)}
           setEnableNext={setEnableNext}
         />

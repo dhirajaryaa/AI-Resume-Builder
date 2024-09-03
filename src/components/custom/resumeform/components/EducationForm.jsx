@@ -9,7 +9,7 @@ import { useCallback, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
+const EducationForm = ({ activeIndex, setEnableNext }) => {
   const { resumeData, setResumeData } = useContext(ResumeDataContext);
   const { isLoading } = useSelector((state) => state.db);
   const { resumeId } = useParams();
@@ -35,10 +35,10 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
   };
   return (
     <section className="border-t-4 border-primary rounded-lg shadow-lg p-4 mt-4">
-      <h2 className="font-bold text-lg">Personal Details</h2>
+      <h2 className="font-bold text-lg">Education</h2>
       <p className="text-xs text-muted-foreground ">
-        Enter your personal details here. This information will be used to
-        create your resume.
+        Add your educational background to make your resume more attractive to
+        potential employers.
       </p>
       <form onSubmit={onSubmit}>
         <div className="grid grid-cols-2 gap-4 mt-4">
@@ -125,4 +125,5 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
   );
 };
 
-export default PersonalDetailsForm
+
+export default EducationForm
