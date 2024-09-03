@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { PersonalDetailsForm, SummaryForm ,EducationForm } from "./";
 
 const ResumeForm = () => {
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(1
+    
+  );
   const [enableNext, setEnableNext] = useState(false);
 
   return (
@@ -52,12 +54,13 @@ const ResumeForm = () => {
       ) : null}
 
       {/* Education Details  */}
-      {activeIndex === 3 ? (
+      
+      {/* {activeIndex === 3 ? (
         <EducationForm
           activeIndex={(v) => setActiveIndex(v)}
           setEnableNext={setEnableNext}
         />
-      ) : null}
+      ) : null} */}
     </section>
   );
 };

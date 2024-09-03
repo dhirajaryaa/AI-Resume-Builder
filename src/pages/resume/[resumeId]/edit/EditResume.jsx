@@ -9,7 +9,7 @@ import { Navigate, useParams } from "react-router-dom";
 const EditResume = () => {
   const { user, loading } = useUser();
   const { resumes } = useSelector((state) => state.db);
-  const [resumeData, setResumeData] = useState(null);
+  const [resumeData, setResumeData] = useState();
   const { resumeId } = useParams();
 
   useEffect(() => {

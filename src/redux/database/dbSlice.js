@@ -7,6 +7,7 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import { toast } from "sonner";
 
 const initialState = {
   isLoading: false,
@@ -42,7 +43,7 @@ export const updateResume = createAsyncThunk(
     try {
       const resumeRef = doc(db, "users", uid, "resumes", docId);
 
-     await updateDoc(resumeRef, resumeData);
+      await updateDoc(resumeRef, resumeData);
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -112,6 +113,16 @@ const DbSlice = createSlice({
       })
       .addCase(updateResume.fulfilled, (state) => {
         state.isLoading = false;
+        toast.success("Data updated successfully!", {
+          duration: 3000, // Optional duration for the toast
+          style: {
+            backgroundColor: "#4CAF50", // Customize success background color
+            color: "#fff", // Customize text color
+          },
+          action: {
+            label: "undo",
+          },
+        });
       })
       .addCase(updateResume.rejected, (state, action) => {
         state.isLoading = false;

@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components";
-import { Toaster } from "./components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner"
 
 const App = () => {
   return (

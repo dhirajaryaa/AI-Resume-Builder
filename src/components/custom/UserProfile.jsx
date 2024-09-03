@@ -12,19 +12,17 @@ import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useDispatch } from "react-redux";
 import { logOut as SignOut } from "@/redux/auth/authSlice";
-import { useToast } from "@/hooks/use-toast"
+import { toast } from "sonner"
+
 
 
 const UserProfile = ({ user }) => {
   const dispatch = useDispatch();
-  const { toast } = useToast()
 
   const logOut = ()=>{
     dispatch(SignOut());
-    toast({
-      title: "SignOut Successful!",
-  
-    })
+    toast("LogOut Successful!")
+
   }
   return (
     <div className="flex items-center gap-4">
