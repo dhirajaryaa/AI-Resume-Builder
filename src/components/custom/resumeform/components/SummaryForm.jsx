@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
 import useUser from "@/hooks/useUser";
 import { updateResume } from "@/redux/database/dbSlice";
-import { Loader2Icon } from "lucide-react";
-import { useCallback, useContext, useRef } from "react";
+import { Bot, Loader2Icon } from "lucide-react";
+import { useCallback, useContext, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -14,19 +16,13 @@ const SummaryForm = ({ activeIndex, setEnableNext }) => {
   const { resumeId } = useParams();
   const dispatch = useDispatch();
   const { user } = useUser();
+  const [summary, setSummary] = useState("");
 
-  const handleInputChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setResumeData({ ...resumeData, [name]: value });
-
-    const formRef = useRef(null);
-  });
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
     activeIndex(2);
     setEnableNext(true);
-    if (formRef.current) formRef.current.reset();
   };
   return (
     <section className="border-t-4 border-primary rounded-lg shadow-lg p-4 mt-4">
@@ -38,13 +34,22 @@ const SummaryForm = ({ activeIndex, setEnableNext }) => {
       <form onSubmit={onSubmit}>
         <div className="grid grid-cols-2 gap-4 mt-4">
           <div className="col-span-2">
-            <Input
-              required
-              onChange={(e) => handleInputChange(e)}
-              type="text"
-              name="summary"
-              id="summary"
-              placeholder="Summary"
+            <div className="flex items-center justify-between gap-4 mb-3">
+              <Label htmlFor="summary">Add Summary</Label>
+              <Button
+                size="sm"
+                type="button"
+                variant="outline"
+                className="border-primary border-2 text-primary hover:text-primary flex gap-3">
+                <Bot />
+                Generate with Ai
+              </Button>
+            </div>
+            <Textarea
+              className="h-36"
+              placeholder="Write Your Summary."
+              defaultValue={summary}
+              onChange={(e) => setSummary(e.target.value)}
             />
           </div>
         </div>
@@ -54,7 +59,6 @@ const SummaryForm = ({ activeIndex, setEnableNext }) => {
             className="flex gap-2 shadow-md"
             type="submit"
             disabled={isLoading}
-            // onClick={onSubmit}
           >
             {isLoading ? <Loader2Icon className="animate-spin" /> : "Save"}
           </Button>

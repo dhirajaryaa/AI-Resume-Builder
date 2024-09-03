@@ -12,7 +12,7 @@ const ResumePreview = () => {
 
   return (
     <section
-      className={`shadow-lg h-full p-6 lg:p-14 border-t-8 max-w-100`}
+      className={`shadow-lg h-full p-6 lg:p-14 border-t-8 max-w-100 border-primary`}
       style={{ borderColor: resumeData?.themeColor }}
     >
       {/* personalDetails  */}
