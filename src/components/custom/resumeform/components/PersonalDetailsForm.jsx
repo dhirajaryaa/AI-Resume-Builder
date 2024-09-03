@@ -2,24 +2,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
+import useUser from "@/hooks/useUser";
+import { updateResume } from "@/redux/database/dbSlice";
 import { Loader2Icon } from "lucide-react";
-import { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 export const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
-  const { setResumeData } = useContext(ResumeDataContext);
+  const { resumeData, setResumeData } = useContext(ResumeDataContext);
   const { isLoading } = useSelector((state) => state.db);
+  const { resumeId } = useParams();
+  const dispatch = useDispatch();
+  const { user } = useUser();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setResumeData((prev) => ({
       ...prev,
       personalDetails: { ...prev.personalDetails, [name]: value },
     }));
-  };
+  });
 
-  const handleSubmit = () => {
-    activeIndex(2);
+  const onSubmit = () => {
     setEnableNext(true);
+    activeIndex(2);
+    dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
   };
 
   return (
@@ -104,7 +111,7 @@ export const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
             className="flex gap-2 shadow-md"
             type="submit"
             disabled={isLoading}
-            onClick={handleSubmit}
+            onClick={onSubmit}
           >
             {isLoading ? <Loader2Icon className="animate-spin" /> : "Save"}
           </Button>

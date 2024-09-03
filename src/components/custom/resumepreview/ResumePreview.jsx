@@ -9,11 +9,12 @@ import {
 import { ResumeDataContext } from "@/context/ResumeDataContext";
 const ResumePreview = () => {
   const {resumeData} = useContext(ResumeDataContext);
+
   
 
   return (
     <section
-      className={`shadow-lg h-full p-6 lg:p-14 border-t-8 `}
+      className={`shadow-lg h-full p-6 lg:p-14 border-t-8 max-w-100`}
       style={{ borderColor: resumeData?.themeColor }}
     >
       {/* personalDetails  */}

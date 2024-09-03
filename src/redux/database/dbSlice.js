@@ -1,6 +1,6 @@
 import { db } from "@/firebase/firebase";
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { addDoc, collection, doc, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 const initialState = {
   isLoading: false,
@@ -14,7 +14,6 @@ export const createResume = createAsyncThunk(
   async ({ title, uid }, { rejectWithValue }) => {
     try {
       const data = {
-        resumeId: nanoid(),
         title: title,
       };
       // get users ref
@@ -24,6 +23,23 @@ export const createResume = createAsyncThunk(
       // add data in subcollecion
       const docRef = await addDoc(resumesCollectionRef, data);
       return docRef.id;
+    } catch (error) {
+      return rejectWithValue(error.massage);
+    }
+  }
+);
+
+export const updateResume = createAsyncThunk(
+  "db/updateResume",
+  async ({ resumeData, docId ,uid}, { rejectWithValue }) => {
+    try {
+      // console.log("resumeRef");
+      console.log(docId);
+      const resumeRef = doc(db, "users", uid, "resumes", docId);
+
+
+      const res = await updateDoc(resumeRef, resumeData);
+      console.log(res);
     } catch (error) {
       return rejectWithValue(error.massage);
     }
@@ -86,6 +102,21 @@ const DbSlice = createSlice({
         state.resumes = [...action.payload];
       })
       .addCase(getResumes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.dbError = action.payload;
+      })
+      .addCase(updateResume.pending, (state) => {
+        state.isLoading = true;
+        state.dbError = null;
+      })
+      .addCase(updateResume.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log(action.payload);
+        console.log("updated");
+
+        // state.resumes = [...action.payload];
+      })
+      .addCase(updateResume.rejected, (state, action) => {
         state.isLoading = false;
         state.dbError = action.payload;
       });

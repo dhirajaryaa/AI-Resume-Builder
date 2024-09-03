@@ -4,16 +4,21 @@ import { resumeData as data } from "@/data/dummyResume";
 import useUser from "@/hooks/useUser";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const EditResume = () => {
   const { user, loading } = useUser();
-  const [resumeData, setResumeData] = useState();
-  const { resumeId } = useParams();
+  const [resumeData, setResumeData] = useState(null);
 
-  if (!user && loading) {
-    <Navigate to="/" replace="true" />;
-  }
+ 
+
+  
+  useEffect(() => {
+    if (!resumeData) {
+      setResumeData(data);
+    }
+  }, [resumeData]);
+  
   if (loading) {
     return (
       <div className="w-full h-screen fixed top-0 left-0 flex items-center justify-center">
@@ -22,9 +27,9 @@ const EditResume = () => {
     );
   }
 
-  useEffect(() => {
-    setResumeData(data);
-  }, []);
+  if (!user && !loading) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <ResumeDataContext.Provider value={{ resumeData, setResumeData }}>

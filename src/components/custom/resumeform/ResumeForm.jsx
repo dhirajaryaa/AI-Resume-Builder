@@ -6,6 +6,7 @@ import { PersonalDetailsForm } from "./components/personalDetailsForm";
 const ResumeForm = () => {
   const [activeIndex, setActiveIndex] = useState(1);
   const [enableNext, setEnableNext] = useState(false);
+
   return (
     <section>
       <div className="flex items-center justify-between">
@@ -35,7 +36,7 @@ const ResumeForm = () => {
       </div>
 
       {/* Personal Details  */}
-      <PersonalDetailsForm activeIndex={(v) => setActiveIndex(v)} setEnableNext={setEnableNext}/>
+      <PersonalDetailsForm activeIndex={(v) => setActiveIndex(v)} setEnableNext={setEnableNext} />
     </section>
   );
 };
