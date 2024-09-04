@@ -7,11 +7,9 @@ import {
 } from "@google/generative-ai";
 
 const initialState = {
-  isLoading: false,
+  aiLoading: false,
   isError: null,
-  result: [
-    
-  ],
+  result: [],
 };
 
 export const generateWithAi = createAsyncThunk(
@@ -30,15 +28,11 @@ export const generateWithAi = createAsyncThunk(
         maxOutputTokens: 8192,
         responseMimeType: "application/json",
       };
-
       const AIChatSession = model.startChat({
         generationConfig,
         history: [],
-        // history: [{ role: 'user', content: prompt }],
       });
-
       const response = await AIChatSession.sendMessage(prompt);
-
       return response.response.text();
     } catch (error) {
       console.log(error);
@@ -54,16 +48,15 @@ const AiSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(generateWithAi.pending, (state) => {
-        state.isLoading = true;
+        state.aiLoading = true;
         state.dbError = null;
       })
       .addCase(generateWithAi.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.aiLoading = false;
         state.result = JSON.parse(action.payload);
-        console.log(JSON.parse(action.payload));
       })
       .addCase(generateWithAi.rejected, (state, action) => {
-        state.isLoading = false;
+        state.aiLoading = false;
         state.isError = action.payload;
       });
   },
