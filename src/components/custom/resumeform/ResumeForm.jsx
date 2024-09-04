@@ -55,12 +55,12 @@ const ResumeForm = () => {
 
       {/* Education Details  */}
       
-      {/* {activeIndex === 3 ? (
+      {activeIndex === 3 ? (
         <EducationForm
           activeIndex={(v) => setActiveIndex(v)}
           setEnableNext={setEnableNext}
         />
-      ) : null} */}
+      ) : null}
     </section>
   );
 };
