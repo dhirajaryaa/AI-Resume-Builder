@@ -6,7 +6,7 @@ import { ResumeDataContext } from "@/context/ResumeDataContext";
 import useUser from "@/hooks/useUser";
 import { updateResume } from "@/redux/database/dbSlice";
 import { GraduationCap, Loader2Icon } from "lucide-react";
-import { useCallback, useContext, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -21,19 +21,32 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
   const handleInputChange = useCallback((e, index) => {
     const { name, value } = e.target;
 
-    setResumeData((prev) => {
-      // if (!education[index]) {
-      //   education[index] = {};
-      // }
-      education[index] = { ...education[index], [name]: value };
-      return { ...prev, education };
+    setEducation((prev) => {
+      const newEducation = [...prev];
+      if (!newEducation[index]) {
+        newEducation[index] = {};
+      }
+      newEducation[index] = { ...newEducation[index], [name]: value };
+      return newEducation;
     });
   });
 
+  useEffect(() => {
+    setResumeData((prev) => {
+      return { ...prev, education };
+    });
+  }, [education]);
+
+  const handleNewEducation = () => {
+    setEducation([...education, {}]);
+  };
+
   const onSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    // console.log(resumeData);
+
     dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
-    activeIndex(2);
+    activeIndex(3);
     setEnableNext(true);
   };
 
@@ -47,7 +60,7 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
 
       {education.map((data, index) => {
         return (
-          <form onSubmit={onSubmit} key={index}>
+          <form onSubmit={(e) => e.preventDefault()} key={index}>
             <div className="grid grid-cols-2 gap-4 mt-4 border-2 rounded-lg p-4">
               <div>
                 <Label htmlFor="degree">Degree Title</Label>
@@ -55,6 +68,7 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
                   required
                   onChange={(e) => handleInputChange(e, index)}
                   type="text"
+                  value={data?.degree}
                   name="degree"
                   id="degree"
                   placeholder="Degree Title"
@@ -65,6 +79,7 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
                 <Input
                   required
                   type="number"
+                  value={data?.yearOfCompletion}
                   name="yearOfCompletion"
                   id="yearOfCompletion"
                   onChange={(e) => handleInputChange(e, index)}
@@ -77,6 +92,7 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
                   required
                   onChange={(e) => handleInputChange(e, index)}
                   type="text"
+                  value={data?.institution}
                   name="institution"
                   id="institution"
                   placeholder="Institution Name"
@@ -89,7 +105,7 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
                   name="description"
                   id="description"
                   placeholder="Description"
-                  value={resumeData?.education?.description}
+                  value={data?.description}
                   onChange={(e) => handleInputChange(e, index)}
                 />
               </div>
@@ -98,62 +114,13 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
         );
       })}
 
-      {/* <form onSubmit={onSubmit}>
-        <div className="grid grid-cols-2 gap-4 mt-4 border-2 rounded-lg p-4">
-          <div>
-            <Label htmlFor="degree">Degree Title</Label>
-            <Input
-              required
-              onChange={(e) => handleInputChange(e)}
-              type="text"
-              name="degree"
-              id="degree"
-              placeholder="Degree Title"
-            />
-          </div>
-          <div>
-            <Label htmlFor="yearOfCompletion">Completion Year</Label>
-            <Input
-              required
-              type="number"
-              name="yearOfCompletion"
-              id="yearOfCompletion"
-              onChange={(e) => handleInputChange(e)}
-              placeholder="Completion Year"
-            />
-          </div>
-          <div className="col-span-2">
-            <Label htmlFor="institution">Institution Name</Label>
-            <Input
-              required
-              onChange={(e) => handleInputChange(e)}
-              type="text"
-              name="institution"
-              id="institution"
-              placeholder="Institution Name"
-            />
-          </div>
-          <div className="col-span-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              className="h-36"
-              name="description"
-              id="description"
-              placeholder="Description"
-              value={resumeData?.education?.description}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </div>
-        </div>
-      </form> */}
-
       <div className="flex items-center justify-between gap-5 mt-8">
         <Button
           size="sm"
           variant="outline"
           className="border-primary border-2 text-primary shadow-md hover:text-primary flex gap-3"
           type="button"
-          onClick={setEducation([...education, {}])}
+          onClick={handleNewEducation}
         >
           <GraduationCap />
           Add More Education
@@ -163,7 +130,7 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
           className="flex gap-2 shadow-md"
           type="submit"
           disabled={isLoading}
-          // onClick={onSubmit}
+          onClick={onSubmit}
         >
           {isLoading ? <Loader2Icon className="animate-spin" /> : "Save"}
         </Button>

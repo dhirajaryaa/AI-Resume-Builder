@@ -26,7 +26,7 @@ const Education = ({ resumeData }) => {
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold">{data?.institution}</p>
                 <p className="text-sm font-semibold">
-                  <span>Year: </span>
+                  {/* <span>Year: </span> */}
                   {data?.yearOfCompletion}
                 </p>
               </div>

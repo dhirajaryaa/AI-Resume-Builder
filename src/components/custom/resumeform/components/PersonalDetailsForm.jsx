@@ -43,7 +43,7 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
           <div>
             <Label htmlFor="firstName">First Name</Label>
             <Input
-              defaultValue={resumeData?.personalDetails.firstName}
+              defaultValue={resumeData?.personalDetails?.firstName}
               required
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -55,7 +55,7 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
           <div>
             <Label htmlFor="lastName">Last Name</Label>
             <Input
-              defaultValue={resumeData?.personalDetails.lastName}
+              defaultValue={resumeData?.personalDetails?.lastName}
               required
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -67,7 +67,7 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
           <div className="col-span-2">
             <Label htmlFor="jobRole">Job Role</Label>
             <Input
-              defaultValue={resumeData?.personalDetails.jobRole}
+              defaultValue={resumeData?.personalDetails?.jobRole}
               required
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -79,7 +79,7 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
           <div className="col-span-2">
             <Label htmlFor="address">Address</Label>
             <Input
-              defaultValue={resumeData?.personalDetails.address}
+              defaultValue={resumeData?.personalDetails?.address}
               required
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -91,7 +91,7 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
           <div>
             <Label htmlFor="phone">Phone</Label>
             <Input
-              defaultValue={resumeData?.personalDetails.phone}
+              defaultValue={resumeData?.personalDetails?.phone}
               required
               type="text"
               name="phone"
@@ -103,7 +103,7 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
-              defaultValue={resumeData?.personalDetails.email}
+              defaultValue={resumeData?.personalDetails?.email}
               required
               type="email"
               name="email"
