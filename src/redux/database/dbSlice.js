@@ -1,12 +1,20 @@
 import { db } from "@/firebase/firebase";
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { addDoc, collection, doc, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+import { toast } from "sonner";
 
 const initialState = {
   isLoading: false,
   dbError: null,
   resumes: [],
-  recentDocId:null,
+  recentDocId: null,
+  resume: {},
 };
 
 export const createResume = createAsyncThunk(
@@ -14,7 +22,6 @@ export const createResume = createAsyncThunk(
   async ({ title, uid }, { rejectWithValue }) => {
     try {
       const data = {
-        resumeId: nanoid(),
         title: title,
       };
       // get users ref
@@ -25,7 +32,20 @@ export const createResume = createAsyncThunk(
       const docRef = await addDoc(resumesCollectionRef, data);
       return docRef.id;
     } catch (error) {
-      return rejectWithValue(error.massage);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateResume = createAsyncThunk(
+  "db/updateResume",
+  async ({ resumeData, docId, uid }, { rejectWithValue }) => {
+    try {
+      const resumeRef = doc(db, "users", uid, "resumes", docId);
+
+      await updateDoc(resumeRef, resumeData);
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -41,22 +61,17 @@ export const getResumes = createAsyncThunk(
 
       // Get all documents in the 'resumes' subcollecion
       const querySnapshot = await getDocs(resumesCollectionRef);
-      
+
       // Loop through each document and extract data
-      let resumes =[];
+      let resumes = [];
 
       querySnapshot.forEach((doc) => {
-        
         resumes.push({ docId: doc.id, ...doc.data() });
-        // return doc
       });
 
-
-      // Return the resumes array
       return resumes;
-
     } catch (error) {
-      return rejectWithValue(error.massage);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -73,8 +88,7 @@ const DbSlice = createSlice({
       })
       .addCase(createResume.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.recentDocId = action.payload
-        console.log(action.payload);
+        state.recentDocId = action.payload;
       })
       .addCase(createResume.rejected, (state, action) => {
         state.isLoading = false;
@@ -86,10 +100,31 @@ const DbSlice = createSlice({
       })
       .addCase(getResumes.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.resumes = [...action.payload]
-        console.log(action.payload);
+        state.resumes = [...action.payload];
       })
       .addCase(getResumes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.dbError = action.payload;
+      })
+
+      .addCase(updateResume.pending, (state) => {
+        state.isLoading = true;
+        state.dbError = null;
+      })
+      .addCase(updateResume.fulfilled, (state) => {
+        state.isLoading = false;
+        toast.success("Data updated successfully!", {
+          duration: 3000, // Optional duration for the toast
+          style: {
+            backgroundColor: "#4CAF50", // Customize success background color
+            color: "#fff", // Customize text color
+          },
+          action: {
+            label: "undo",
+          },
+        });
+      })
+      .addCase(updateResume.rejected, (state, action) => {
         state.isLoading = false;
         state.dbError = action.payload;
       });

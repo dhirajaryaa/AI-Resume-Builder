@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, db, provider } from "../../firebase/firebase.js";
 import { doc, setDoc } from "firebase/firestore";
+
 
 const initialState = {
   user: null,
   isError: null,
   isLoading: false,
 };
+
 
 const transformUser = (user) => {
   if (!user) return null;
@@ -25,7 +27,7 @@ export const signInGoogle = createAsyncThunk(
         name: result.user.displayName,
         email: result.user.email,
       });
-      
+
       return transformUser(result.user);
     } catch (error) {
       return rejectWithValue(error.massage);
@@ -42,6 +44,18 @@ export const checkAuth = createAsyncThunk(
       } else {
         throw new Error("No user is currently logged in");
       }
+    } catch (error) {
+      return rejectWithValue(error.massage);
+    }
+  }
+);
+
+export const logOut = createAsyncThunk(
+  "auth/logOut",
+  async (_, { rejectWithValue }) => {
+    try {
+      await signOut(auth);
+     
     } catch (error) {
       return rejectWithValue(error.massage);
     }
@@ -73,6 +87,17 @@ export const AuthSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(checkAuth.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      })
+      .addCase(logOut.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.isLoading = false;
+        state.user = null;
+      })
+      .addCase(logOut.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       });
