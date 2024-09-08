@@ -2,7 +2,7 @@
 import React from "react";
 
 const Skills = ({ resumeData }) => {
-
+  
   return (
     <>
       <h2
@@ -16,26 +16,27 @@ const Skills = ({ resumeData }) => {
         style={{ borderColor: resumeData?.themeColor }}
       />
       <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-5 items-center">
-        {resumeData?.skills&&resumeData?.skills.map((skill, index) => {
-          return (
-            <div
-              key={index}
-              className="text-xs  font-semibold flex justify-between w-full"
-            >
-              <h3>{skill?.name}</h3>
+        {resumeData?.skills?.length > 0 &&
+          resumeData?.skills?.map((skill, index) => {
+            return (
+              <div
+                key={index}
+                className="text-xs  font-semibold flex justify-between w-full"
+              >
+                <h3>{skill?.skillsName}</h3>
 
-              <div className="bg-gray-200 h-2 w-28">
-                <div
-                  className="h-2"
-                  style={{
-                    width: skill?.knowledge,
-                    backgroundColor: resumeData?.themeColor,
-                  }}
-                ></div>
+                <div className="bg-gray-200 h-2 w-28">
+                  <div
+                    className="h-2 bg-primary"
+                    style={{
+                      width: skill?.knowledge+"%" || "0%",
+                      backgroundColor: resumeData?.themeColor,
+                    }}
+                  ></div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </>
   );
