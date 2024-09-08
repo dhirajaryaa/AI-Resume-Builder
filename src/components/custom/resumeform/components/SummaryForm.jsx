@@ -46,7 +46,7 @@ const SummaryForm = ({ activeIndex, setEnableNext }) => {
         uid: user.uid,
       })
     );
-    activeIndex(2);
+    activeIndex(3);
     setEnableNext(true);
   };
 

@@ -27,7 +27,7 @@ const PersonalDetailsForm = ({ activeIndex, setEnableNext }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
-    // activeIndex(2);
+    activeIndex(2);
     setEnableNext(true);
   };
 

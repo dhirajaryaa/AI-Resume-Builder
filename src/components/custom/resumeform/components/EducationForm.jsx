@@ -46,7 +46,7 @@ const EducationForm = ({ activeIndex, setEnableNext }) => {
     // console.log(resumeData);
 
     dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
-    activeIndex(3);
+    activeIndex(4);
     setEnableNext(true);
   };
 

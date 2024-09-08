@@ -6,6 +6,7 @@ import {
   SummaryForm,
   EducationForm,
   ProfessionalExperienceForm,
+  SkillsForm,
 } from "./";
 
 const ResumeForm = () => {
@@ -69,6 +70,15 @@ const ResumeForm = () => {
 
       {activeIndex === 4 ? (
         <ProfessionalExperienceForm
+          activeIndex={(v) => setActiveIndex(v)}
+          setEnableNext={setEnableNext}
+        />
+      ) : null}
+
+            {/* Skills */}
+
+            {activeIndex === 5 ? (
+        <SkillsForm
           activeIndex={(v) => setActiveIndex(v)}
           setEnableNext={setEnableNext}
         />

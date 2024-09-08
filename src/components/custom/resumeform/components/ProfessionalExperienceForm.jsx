@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ResumeDataContext } from "@/context/ResumeDataContext";
 import useUser from "@/hooks/useUser";
 import { updateResume } from "@/redux/database/dbSlice";
-import { BriefcaseBusiness, Loader2Icon } from "lucide-react";
+import { BriefcaseBusiness, CircleX, Loader2Icon } from "lucide-react";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -42,13 +42,21 @@ const ProfessionalExperienceForm = ({ activeIndex, setEnableNext }) => {
   const handleNewWorkExperience = () => {
     setWorkExperience([...workExperience, {}]);
   };
+  const handleRemoveWorkExperience = () => {
+    setWorkExperience(workExperience.slice(0, -1));
+    setWorkExperience(workExperience.slice(0, -1));
+    setWorkExperience(workExperience.slice(0, -1));
+    setWorkExperience(workExperience.slice(0, -1));
+  };
 
+
+  
   const onSubmit = (e) => {
     // e.preventDefault();
     console.log(resumeData);
 
     dispatch(updateResume({ resumeData, docId: resumeId, uid: user.uid }));
-    activeIndex(3);
+    activeIndex(4);
     setEnableNext(true);
   };
 
@@ -63,7 +71,17 @@ const ProfessionalExperienceForm = ({ activeIndex, setEnableNext }) => {
       {workExperience?.map((data, index) => {
         return (
           <form onSubmit={(e) => e.preventDefault()} key={index}>
-            <div className="grid grid-cols-2 gap-4 mt-4 border-2 rounded-lg p-4">
+            <div className="grid grid-cols-2 gap-4 mt-4 border-2 rounded-lg p-4 relative">
+              <div className="absolute -top-2 -right-2  cursor-pointer">
+                <Button
+                  size="xs"
+                  variant="ghost"
+                  className=" rounded-full"
+                  onClick={handleRemoveWorkExperience}
+                >
+                  <CircleX />
+                </Button>
+              </div>
               <div>
                 <Label htmlFor="jobTitle">Job Title</Label>
                 <Input
@@ -89,7 +107,7 @@ const ProfessionalExperienceForm = ({ activeIndex, setEnableNext }) => {
               <div>
                 <Label htmlFor="startDate">Start Date</Label>
                 <Input
-                  type="number"
+                  type="text"
                   value={data?.startDate}
                   name="startDate"
                   id="startDate"
@@ -100,7 +118,7 @@ const ProfessionalExperienceForm = ({ activeIndex, setEnableNext }) => {
               <div>
                 <Label htmlFor="endDate">End Date</Label>
                 <Input
-                  type="number"
+                  type="text"
                   value={data?.endDate}
                   name="endDate"
                   id="endDate"
